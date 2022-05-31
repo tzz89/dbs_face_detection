@@ -19,6 +19,7 @@ pip install -r requirements.dev
 - retinaface: https://drive.google.com/file/d/1xOaFDkN77Lira-lEeyFtwbUvm2F2YcvP/view?usp=sharing
 
 4. annotate video
+Use --sample_rate <int> to speed up inference
 ```
 ## Can only accept and output MP4 files and therefore please include .mp4 extensions
 python src/app.py --video_fp test_videos/test_video.mp4 --output_fp test_videos/output_2.mp4

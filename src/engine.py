@@ -71,7 +71,10 @@ def annotate_video(video_fp:str,
                    reference_labels:list, 
                    detection_model,
                    embedding_model,
-                   output_video_fp:str)->None:
+                   output_video_fp:str,
+                   sample_rate:int = 1
+                   )->None:
+
     """
     Takes in an video filepath
     For each video frame, extracts all the faces in the frame a compare with reference embeddings
@@ -85,13 +88,14 @@ def annotate_video(video_fp:str,
     
     
     out = cv2.VideoWriter(output_video_fp, cv2.VideoWriter_fourcc(*'mp4v'), 15, (frame_width,frame_height))
-    
+    counter=0 
     try:
         while True:
             ret, frame = cap.read()
 
             if ret == True:
-                coords, embeddings = get_faces_embeddings(frame, embedding_model, detection_model)
+                if counter == 0 or counter%sample_rate == 0:
+                    coords, embeddings = get_faces_embeddings(frame, embedding_model, detection_model)
                 
                 if len(embeddings)>0:
                     cos_sims = cosine_similarity(embeddings,reference_embeddings)
@@ -116,7 +120,7 @@ def annotate_video(video_fp:str,
         
                 #save frame
                 out.write(frame)
-
+                counter+=1
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             else:

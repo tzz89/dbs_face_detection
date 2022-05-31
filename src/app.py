@@ -36,6 +36,11 @@ def parse_args():
                         type=str,
                         required=True)
 
+    parser.add_argument("--sample_rate",
+                        help='sample the frames instead of predicting on every frame',
+                        default=1,
+                        type=int) 
+
     args = parser.parse_args()
     return args
 
@@ -53,7 +58,7 @@ def main():
 
     annotate_video(args.video_fp, reference_embeddings, 
                    reference_labels, detection_model, 
-                   embedding_model, args.output_fp)
+                   embedding_model, args.output_fp, args.sample_rate)
 
 
 
