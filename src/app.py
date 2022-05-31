@@ -41,6 +41,11 @@ def parse_args():
                         default=1,
                         type=int) 
 
+    parser.add_argument("--threshold",
+                        help='cosine sim threshold to assign face to a class',
+                        default=0.52,
+                        type=float)
+
     args = parser.parse_args()
     return args
 
@@ -58,7 +63,8 @@ def main():
 
     annotate_video(args.video_fp, reference_embeddings, 
                    reference_labels, detection_model, 
-                   embedding_model, args.output_fp, args.sample_rate)
+                   embedding_model, args.output_fp, 
+                   args.sample_rate, args.threshold)
 
 
 

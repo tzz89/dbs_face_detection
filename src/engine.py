@@ -72,7 +72,8 @@ def annotate_video(video_fp:str,
                    detection_model,
                    embedding_model,
                    output_video_fp:str,
-                   sample_rate:int = 1
+                   sample_rate:int = 1,
+                   threshold:float=0.45
                    )->None:
 
     """
@@ -107,7 +108,7 @@ def annotate_video(video_fp:str,
                         print(f"cos_sims {cos_sims[index][pred]}")
                         
                         text = "UNKNOWN"
-                        if cos_sims[index][pred] > 0.4:
+                        if cos_sims[index][pred] > threshold:
                             text = reference_labels[pred]
                             
                         cv2.putText(frame, text, 
