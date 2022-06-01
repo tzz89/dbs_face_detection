@@ -17,9 +17,9 @@ pip install -r requirements.dev
 3. download model weights and place it in model_weights folder
 - facenet: https://drive.google.com/file/d/17XcYnJorQ7wx6m7YLoah90-LB-QoF7zg/view?usp=sharing
 - retinaface: https://drive.google.com/file/d/1xOaFDkN77Lira-lEeyFtwbUvm2F2YcvP/view?usp=sharing
-
-4. annotate video
-Use --sample_rate <int> to speed up inference
+4. populate the reference images in test_images folder. Each folder is a class and for a class, you can provide multiple images as references. The more image you provide, the better the accuracy
+5. annotate video
+Use --sample_rate <int> to speed up inference, check the declarable variables using (src/app.py --help)
 ```
 ## Can only accept and output MP4 files and therefore please include .mp4 extensions
 python src/app.py --video_fp test_videos/test_video.mp4 --output_fp test_videos/output_2.mp4
